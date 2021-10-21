@@ -7,8 +7,9 @@
     --footer-link: #ef8354;
     --button-1: #4f5d75;
     --button-2: #ffffff;
-    --color-1: #ef8354;
-    --color-2: #ffffff;
+    --color-p1: #ef8354;
+    --color-p2: #ffffff;
+    --color-draw: #4f5d75;
     --border: #4f5d75;
 }
 
@@ -175,11 +176,11 @@ button:hover {
 }
 
 .tic {
-    color: var(--color-1);
+    color: var(--color-p1);
 }
 
 .tac {
-    color: var(--color-2);
+    color: var(--color-p2);
 }
 
 .tic,

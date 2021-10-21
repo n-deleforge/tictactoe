@@ -3,9 +3,9 @@
 
 let gameTable; let listCases; let lastCell; let currentPlayer = rand(1, 2);
 const GRID = 3;
-const COLOR_PLAYER1 = getVariableCSS("color-1");
-const COLOR_PLAYER2 = getVariableCSS("color-2");
-const COLOR_DRAW = getVariableCSS("border");
+const COLOR_PLAYER1 = getVariableCSS("color-p1");
+const COLOR_PLAYER2 = getVariableCSS("color-p2");
+const COLOR_DRAW = getVariableCSS("color-draw");
 
 // =================================================
 // ============ MAIN
@@ -14,7 +14,6 @@ const COLOR_DRAW = getVariableCSS("border");
  * Initialize the game and events
  **/
 
- get("#back").addEventListener("click", () => { navigate("../") });
 get("#reload").addEventListener("click", () => { document.location.reload(); });
 get("#switchLanguage").addEventListener("click", switchLanguage);
 get("#play").addEventListener("click", createGame);
@@ -51,7 +50,6 @@ function createGame() {
   get("#player").style.display = "flex";
   get(".buttonList")[0].style.display = "none";
   get("#play").style.display = "none";
-  get("#back").style.display = "none";
   checkPlayer();
 
   // Creation of the grid
