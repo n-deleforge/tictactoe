@@ -47,6 +47,7 @@ function play(cell) {
 
 function createGame() {
   // Update the display
+  get("#footer").innerHTML = CONTENT.footerInGame;
   get("#player").style.display = "flex";
   get(".buttonList")[0].style.display = "none";
   get("#play").style.display = "none";

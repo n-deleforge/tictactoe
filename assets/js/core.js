@@ -7,6 +7,7 @@ const MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 const FRENCH = {
     'footer': "Disponible sur " + GITHUB + " (v " + VERSION + ") © 2020 | <a id=\"switchLanguage\"></a>",
+    'footerInGame': "Disponible sur " + GITHUB + " (v " + VERSION + ") © 2020",
     'tictactoe': "Le jeu du morpion", 'title': "Le jeu du morpion",
     'play': "Jouer",
     'reload': "Recommencer",
@@ -20,6 +21,7 @@ const FRENCH = {
 
 const ENGLISH = {
     'footer': "Available on " + GITHUB + " (v " + VERSION + ") © 2020 | <a id=\"switchLanguage\"></a>",
+    'footerInGame': "Available on " + GITHUB + " (v " + VERSION + ") © 2020",
     'tictactoe': "Tic Tac Toe", 'title': "Tic Tac Toe",
     'play': "Play",
     'reload': "Restart",
