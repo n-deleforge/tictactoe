@@ -3,11 +3,12 @@
 
 const VERSION = "1.0";
 const GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/tictactoe\">GitHub</a>";
-const MOBILE = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const FOOTER = "V. " + VERSION + " | © 2020-22 | " + GITHUB + " | <a id=\"switchLanguage\"></a>";
+const FOOTER_INGAME = "V. " + VERSION + " | © 2020-22 | " + GITHUB;
 
 const FRENCH = {
-    'footer': "Disponible sur " + GITHUB + " (v " + VERSION + ") © 2020 | <a id=\"switchLanguage\"></a>",
-    'footerInGame': "Disponible sur " + GITHUB + " (v " + VERSION + ") © 2020",
+    'footer': FOOTER,
+    'footerInGame': FOOTER_INGAME,
     'tictactoe': "Le jeu du morpion", 'title': "Le jeu du morpion",
     'play': "Jouer",
     'reload': "Recommencer",
@@ -16,12 +17,12 @@ const FRENCH = {
     'win_part1': "Victoire du joueur ",
     'win_part2': " 😁",
     'draw': "Égalité 😱",
-    'switchLanguage' : "English"
+    'switchLanguage' : "EN"
 };
 
 const ENGLISH = {
-    'footer': "Available on " + GITHUB + " (v " + VERSION + ") © 2020 | <a id=\"switchLanguage\"></a>",
-    'footerInGame': "Available on " + GITHUB + " (v " + VERSION + ") © 2020",
+    'footer': FOOTER,
+    'footerInGame': FOOTER_INGAME,
     'tictactoe': "Tic Tac Toe", 'title': "Tic Tac Toe",
     'play': "Play",
     'reload': "Restart",
@@ -30,7 +31,7 @@ const ENGLISH = {
     'win_part1': "Player ",
     'win_part2': " won 😁",
     'draw': "Draw 😱",
-    'switchLanguage' : "Français"
+    'switchLanguage' : "FR"
 }
 
 // =================================================

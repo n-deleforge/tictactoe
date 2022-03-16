@@ -1,11 +1,11 @@
 // =================================================
 // ============ SETTINGS
 
-let gameTable; let listCases; let lastCell; let currentPlayer = rand(1, 2);
 const GRID = 3;
 const COLOR_PLAYER1 = getVariableCSS("color-p1");
 const COLOR_PLAYER2 = getVariableCSS("color-p2");
 const COLOR_DRAW = getVariableCSS("color-draw");
+let gameTable; let listCases; let lastCell; let currentPlayer = rand(1, 2);
 
 // =================================================
 // ============ MAIN
@@ -17,6 +17,30 @@ const COLOR_DRAW = getVariableCSS("color-draw");
 get("#reload").addEventListener("click", () => { document.location.reload(); });
 get("#switchLanguage").addEventListener("click", switchLanguage);
 get("#play").addEventListener("click", createGame);
+
+/**
+ * Create a new game and add event listener on each case
+ **/
+
+ function createGame() {
+  // Update the display
+  get("#footer").innerHTML = CONTENT.footerInGame;
+  get("#player").style.display = "flex";
+  get(".buttonList")[0].style.display = "none";
+  get("#play").style.display = "none";
+  checkPlayer();
+
+  // Creation of the grid
+  gameTable = new Array(GRID * GRID);
+  gameTable.fill(" ");
+
+  // Add listeners on all cases
+  listCases = get(".case");
+  for (let i = 0; i < listCases.length; i++) {
+    listCases[i].innerHTML = "";
+    listCases[i].addEventListener("click", () => { play(i); });
+  }
+}
 
 /**
  * Check the played case, check the victory and update the turn
@@ -38,30 +62,6 @@ function play(cell) {
 
     // Check of the victory/draw
     checkVictory();
-  }
-}
-
-/**
- * Create a new game and add event listener on each case
- **/
-
-function createGame() {
-  // Update the display
-  get("#footer").innerHTML = CONTENT.footerInGame;
-  get("#player").style.display = "flex";
-  get(".buttonList")[0].style.display = "none";
-  get("#play").style.display = "none";
-  checkPlayer();
-
-  // Creation of the grid
-  gameTable = new Array(GRID * GRID);
-  gameTable.fill(" ");
-
-  // Add listeners on all cases
-  listCases = get(".case");
-  for (let i = 0; i < listCases.length; i++) {
-    listCases[i].innerHTML = "";
-    listCases[i].addEventListener("click", () => { play(i); });
   }
 }
 
