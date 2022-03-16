@@ -5,7 +5,7 @@ const GRID = 3;
 const COLOR_PLAYER1 = getVariableCSS("color-p1");
 const COLOR_PLAYER2 = getVariableCSS("color-p2");
 const COLOR_DRAW = getVariableCSS("color-draw");
-let gameTable; let listCases; let lastCell; let currentPlayer = rand(1, 2);
+let _gameTable; let _listCases; let _lastCell; let _currentPlayer = rand(1, 2);
 
 // =================================================
 // ============ MAIN
@@ -31,14 +31,14 @@ get("#play").addEventListener("click", createGame);
   checkPlayer();
 
   // Creation of the grid
-  gameTable = new Array(GRID * GRID);
-  gameTable.fill(" ");
+  _gameTable = new Array(GRID * GRID);
+  _gameTable.fill(" ");
 
   // Add listeners on all cases
-  listCases = get(".case");
-  for (let i = 0; i < listCases.length; i++) {
-    listCases[i].innerHTML = "";
-    listCases[i].addEventListener("click", () => { play(i); });
+  _listCases = get(".case");
+  for (let i = 0; i < _listCases.length; i++) {
+    _listCases[i].innerHTML = "";
+    _listCases[i].addEventListener("click", () => { play(i); });
   }
 }
 
@@ -48,16 +48,16 @@ get("#play").addEventListener("click", createGame);
  **/
 
 function play(cell) {
-  lastCell = cell;
+  _lastCell = cell;
 
   // Check if the case is empty
-  if (gameTable[lastCell] == " ") {
+  if (_gameTable[_lastCell] == " ") {
     get("#writing").play();
     navigator.vibrate("50");
 
-    gameTable[lastCell] = currentPlayer == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
+    _gameTable[_lastCell] = _currentPlayer == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
     for (let i = 0; i < GRID * GRID; i++) {
-      listCases[i].innerHTML = gameTable[i];
+      _listCases[i].innerHTML = _gameTable[i];
     }
 
     // Check of the victory/draw
@@ -71,10 +71,10 @@ function play(cell) {
  **/
 
 function checkPlayer(newPlayer = false) {
-  if (newPlayer == true) currentPlayer == 1 ? currentPlayer = 2 : currentPlayer = 1;
+  if (newPlayer == true) _currentPlayer == 1 ? _currentPlayer = 2 : _currentPlayer = 1;
 
-  get("#player").style.color = currentPlayer == 1 ?  COLOR_PLAYER1 :  COLOR_PLAYER2;
-  get("#player").innerHTML = CONTENT.turn_part1 + currentPlayer + CONTENT.turn_part2;
+  get("#player").style.color = _currentPlayer == 1 ?  COLOR_PLAYER1 :  COLOR_PLAYER2;
+  get("#player").innerHTML = CONTENT.turn_part1 + _currentPlayer + CONTENT.turn_part2;
 }
 
 /**
@@ -83,23 +83,23 @@ function checkPlayer(newPlayer = false) {
 
 function checkVictory() {
   // Check victory
-  let existingCombo = gameTable[lastCell];
-  if ((gameTable[0] == existingCombo && gameTable[1] == existingCombo && gameTable[2] == existingCombo) ||
-      (gameTable[3] == existingCombo && gameTable[4] == existingCombo && gameTable[5] == existingCombo) ||
-      (gameTable[6] == existingCombo && gameTable[7] == existingCombo && gameTable[8] == existingCombo) ||
-      (gameTable[0] == existingCombo && gameTable[3] == existingCombo && gameTable[6] == existingCombo) ||
-      (gameTable[1] == existingCombo && gameTable[4] == existingCombo && gameTable[7] == existingCombo) ||
-      (gameTable[2] == existingCombo && gameTable[5] == existingCombo && gameTable[8] == existingCombo) ||
-      (gameTable[0] == existingCombo && gameTable[4] == existingCombo && gameTable[8] == existingCombo) ||
-      (gameTable[2] == existingCombo && gameTable[4] == existingCombo && gameTable[6] == existingCombo)) {
+  let existingCombo = _gameTable[_lastCell];
+  if ((_gameTable[0] == existingCombo && _gameTable[1] == existingCombo && _gameTable[2] == existingCombo) ||
+      (_gameTable[3] == existingCombo && _gameTable[4] == existingCombo && _gameTable[5] == existingCombo) ||
+      (_gameTable[6] == existingCombo && _gameTable[7] == existingCombo && _gameTable[8] == existingCombo) ||
+      (_gameTable[0] == existingCombo && _gameTable[3] == existingCombo && _gameTable[6] == existingCombo) ||
+      (_gameTable[1] == existingCombo && _gameTable[4] == existingCombo && _gameTable[7] == existingCombo) ||
+      (_gameTable[2] == existingCombo && _gameTable[5] == existingCombo && _gameTable[8] == existingCombo) ||
+      (_gameTable[0] == existingCombo && _gameTable[4] == existingCombo && _gameTable[8] == existingCombo) ||
+      (_gameTable[2] == existingCombo && _gameTable[4] == existingCombo && _gameTable[6] == existingCombo)) {
 
       endGame();
-      currentPlayer == 1 ? get("#player").style.color = COLOR_PLAYER1 : get("#player").style.color = COLOR_PLAYER2;
-      get("#player").innerHTML = CONTENT.win_part1 + currentPlayer + CONTENT.win_part2;
+      _currentPlayer == 1 ? get("#player").style.color = COLOR_PLAYER1 : get("#player").style.color = COLOR_PLAYER2;
+      get("#player").innerHTML = CONTENT.win_part1 + _currentPlayer + CONTENT.win_part2;
   }
 
   // Check draw
-  else if (gameTable.indexOf(" ") == -1) {
+  else if (_gameTable.indexOf(" ") == -1) {
     endGame();
     get("#player").style.color = COLOR_DRAW;
     get("#player").innerHTML = CONTENT.draw;
@@ -118,16 +118,4 @@ function endGame() {
   get(".buttonList")[0].style.display = "flex";
   get("#reload").style.display = "block";
   get("#player").style.fontSize = "2em";
-}
-
-// =================================================
-// ============ UNCATEGORIZED
-
-/**
- * Switch between English and French
- **/
-
- function switchLanguage() {
-  (getCookie("GAMZ-language") == "FR") ? setCookie("GAMZ-language", "EN") : setCookie("GAMZ-language", "FR");
-  location.reload();
 }

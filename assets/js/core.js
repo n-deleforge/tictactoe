@@ -5,6 +5,7 @@ const VERSION = "1.0";
 const GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/tictactoe\">GitHub</a>";
 const FOOTER = "V. " + VERSION + " | © 2020-22 | " + GITHUB + " | <a id=\"switchLanguage\"></a>";
 const FOOTER_INGAME = "V. " + VERSION + " | © 2020-22 | " + GITHUB;
+const COOKIE_LANG = "GAMZ-language";
 
 const FRENCH = {
     'footer': FOOTER,
@@ -17,7 +18,7 @@ const FRENCH = {
     'win_part1': "Victoire du joueur ",
     'win_part2': " 😁",
     'draw': "Égalité 😱",
-    'switchLanguage' : "EN"
+    'switchLanguage' : "English"
 };
 
 const ENGLISH = {
@@ -31,20 +32,28 @@ const ENGLISH = {
     'win_part1': "Player ",
     'win_part2': " won 😁",
     'draw': "Draw 😱",
-    'switchLanguage' : "FR"
+    'switchLanguage' : "French"
 }
 
 // =================================================
 // ============ CORE INITIALISATION
 
-// Language cookie
-if (!getCookie("GAMZ-language")) setCookie("GAMZ-language" , "EN");
+// Setup language data
+if (!getCookie(COOKIE_LANG)) setCookie(COOKIE_LANG , "EN");
+const CONTENT = (getCookie(COOKIE_LANG) == "FR") ? FRENCH : ENGLISH;
+let _names = Object.keys(CONTENT);
+let _values = Object.values(CONTENT);
 
-// Determine the language of the app
-const CONTENT = (getCookie("GAMZ-language") == "FR") ? FRENCH : ENGLISH;
-let names = Object.keys(CONTENT); 
-let values = Object.values(CONTENT);
+for (let i = 0; i < _names.length; i++) {
+    if (get("#" + _names[i])) {
+        get("#" + _names[i]).innerHTML = _values[i];
+    }
+}
 
-for (let i = 0; i < names.length; i++) {
-    if (get("#" + names[i])) get("#" + names[i]).innerHTML = values[i];
+// Able to switch language between French and English
+if (get("#switchLanguage")) {
+    get("#switchLanguage").addEventListener("click", () => {
+        (getCookie(COOKIE_LANG) == "FR") ? setCookie(COOKIE_LANG, "EN") : setCookie(COOKIE_LANG, "FR");
+        location.reload();
+    });
 }
