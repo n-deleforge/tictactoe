@@ -117,7 +117,7 @@ function endGame() {
   get("#board").style.display = "none";
   get(".buttonList")[0].style.display = "flex";
   get("#reload").style.display = "block";
-  get("#player").style.fontSize = "3em";
+  get("#player").style.fontSize = "2em";
 }
 
 // =================================================
