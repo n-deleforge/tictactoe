@@ -22,7 +22,7 @@ You can try the application directly in your browser [here](https://nicolas-dele
 If you want to selfhost **TicTacToe** :
 - Clone the repository.
 - Download [littleJS](https://github.com/n-deleforge/littleJS) and include it in the `assets/js` folder.
-- Edit `index.html` and replace the line 55 with `<script src="assets/littleJS.min.js"></script>`.
+- Edit `index.html` and replace the line 54 with `<script src="assets/littleJS.min.js"></script>`.
 
 # Changelog
 

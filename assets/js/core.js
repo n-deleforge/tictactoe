@@ -10,7 +10,8 @@ const COOKIE_LANG = "GAMZ-language";
 const FRENCH = {
     'footer': FOOTER,
     'footerInGame': FOOTER_INGAME,
-    'tictactoe': "Le jeu du morpion", 'title': "Le jeu du morpion",
+    'tictactoe': "Le jeu du morpion",
+    'title': "Le jeu du morpion",
     'play': "Jouer",
     'reload': "Recommencer",
     'turn_part1': "C'est au tour du joueur ",
@@ -24,7 +25,8 @@ const FRENCH = {
 const ENGLISH = {
     'footer': FOOTER,
     'footerInGame': FOOTER_INGAME,
-    'tictactoe': "Tic Tac Toe", 'title': "Tic Tac Toe",
+    'tictactoe': "Tic Tac Toe",
+    'title': "Tic Tac Toe",
     'play': "Play",
     'reload': "Restart",
     'turn_part1': "Player ",
@@ -38,17 +40,18 @@ const ENGLISH = {
 // =================================================
 // ============ CORE INITIALISATION
 
-// Setup language data
-if (!getCookie(COOKIE_LANG)) setCookie(COOKIE_LANG , "EN");
-const CONTENT = (getCookie(COOKIE_LANG) == "FR") ? FRENCH : ENGLISH;
-let _names = Object.keys(CONTENT);
-let _values = Object.values(CONTENT);
-
-for (let i = 0; i < _names.length; i++) {
-    if (get("#" + _names[i])) {
-        get("#" + _names[i]).innerHTML = _values[i];
-    }
+// Setup cookie language
+if (!getCookie(COOKIE_LANG)) {
+    setCookie(COOKIE_LANG , "EN");
 }
+
+// Setup content according language
+const CONTENT = (getCookie(COOKIE_LANG) == "FR") ? FRENCH : ENGLISH;
+Object.keys(CONTENT).forEach(key => {
+    if (get("#" + key)) {
+        get("#" + key).innerHTML = CONTENT[key];
+    }
+});
 
 // Able to switch language between French and English
 if (get("#switchLanguage")) {

@@ -5,7 +5,7 @@ const GRID = 3;
 const COLOR_PLAYER1 = getVariableCSS("color-p1");
 const COLOR_PLAYER2 = getVariableCSS("color-p2");
 const COLOR_DRAW = getVariableCSS("color-draw");
-let _gameTable; let _listCases; let _lastCell; let _currentPlayer = rand(1, 2);
+let _gameTable,  _listCases,  _lastCell, _currentPlayer = rand(1, 2);
 
 // =================================================
 // ============ MAIN
@@ -14,9 +14,8 @@ let _gameTable; let _listCases; let _lastCell; let _currentPlayer = rand(1, 2);
  * Initialize the game and events
  **/
 
-get("#reload").addEventListener("click", () => { document.location.reload(); });
-get("#switchLanguage").addEventListener("click", switchLanguage);
 get("#play").addEventListener("click", createGame);
+get("#reload").addEventListener("click", () => { document.location.reload(); });
 
 /**
  * Create a new game and add event listener on each case
@@ -36,11 +35,11 @@ get("#play").addEventListener("click", createGame);
 
   // Add listeners on all cases
   _listCases = get(".case");
-  for (let i = 0; i < _listCases.length; i++) {
-    _listCases[i].innerHTML = "";
-    _listCases[i].addEventListener("click", () => { play(i); });
-  }
-}
+  _listCases.forEach((nbCase, index) => {
+    nbCase.innerHTML = "";
+    nbCase.addEventListener("click", () =>{ play(index) });
+  });
+ }
 
 /**
  * Check the played case, check the victory and update the turn
@@ -55,6 +54,7 @@ function play(cell) {
     get("#writing").play();
     navigator.vibrate("50");
 
+    // Fulfill the board
     _gameTable[_lastCell] = _currentPlayer == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
     for (let i = 0; i < GRID * GRID; i++) {
       _listCases[i].innerHTML = _gameTable[i];
@@ -71,14 +71,18 @@ function play(cell) {
  **/
 
 function checkPlayer(newPlayer = false) {
-  if (newPlayer == true) _currentPlayer == 1 ? _currentPlayer = 2 : _currentPlayer = 1;
-
+  // Switch player
+  if (newPlayer == true) {
+    _currentPlayer == 1 ? _currentPlayer = 2 : _currentPlayer = 1;
+  }
+  
+  // Get the right color and display the player
   get("#player").style.color = _currentPlayer == 1 ?  COLOR_PLAYER1 :  COLOR_PLAYER2;
   get("#player").innerHTML = CONTENT.turn_part1 + _currentPlayer + CONTENT.turn_part2;
 }
 
 /**
- * Check the victory or the draw and call the endGame function
+ * Check the victory and the draw
  **/
 
 function checkVictory() {
@@ -106,11 +110,13 @@ function checkVictory() {
   }
 
   // Change player if no draw or victory
-  else checkPlayer(true);
+  else {
+    checkPlayer(true);
+  }
 }
 
 /**
- * Change the display for the results and save the number of games
+ * Change the display for the results
  **/
 
 function endGame() {
