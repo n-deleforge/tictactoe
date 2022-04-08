@@ -5,7 +5,8 @@ const GRID = 3;
 const COLOR_PLAYER1 = getVariableCSS("color-p1");
 const COLOR_PLAYER2 = getVariableCSS("color-p2");
 const COLOR_DRAW = getVariableCSS("color-draw");
-let _gameTable,  _listCases,  _lastCell, _currentPlayer = rand(1, 2);
+let _currentPlayer = rand(1, 2),
+    _gameTable,  _listCases,  _lastCell;
 
 // =================================================
 // ============ MAIN
@@ -24,7 +25,8 @@ get("#reload").addEventListener("click", () => { document.location.reload(); });
  function createGame() {
   // Update the display
   get("#footer").innerHTML = CONTENT.footerInGame;
-  get("#player").style.display = "flex";
+  get("#titleScreen").style.display = "none";
+  get("#board").style.display = "flex";
   get(".buttonList")[0].style.display = "none";
   get("#play").style.display = "none";
   checkPlayer();
@@ -51,9 +53,6 @@ function play(cell) {
 
   // Check if the case is empty
   if (_gameTable[_lastCell] == " ") {
-    get("#writing").play();
-    navigator.vibrate("50");
-
     // Fulfill the board
     _gameTable[_lastCell] = _currentPlayer == 1 ? '<span class="tic">X</span>' : '<span class="tac">O</span>';
     for (let i = 0; i < GRID * GRID; i++) {
@@ -97,16 +96,12 @@ function checkVictory() {
       (_gameTable[0] == existingCombo && _gameTable[4] == existingCombo && _gameTable[8] == existingCombo) ||
       (_gameTable[2] == existingCombo && _gameTable[4] == existingCombo && _gameTable[6] == existingCombo)) {
 
-      endGame();
-      _currentPlayer == 1 ? get("#player").style.color = COLOR_PLAYER1 : get("#player").style.color = COLOR_PLAYER2;
-      get("#player").innerHTML = CONTENT.win_part1 + _currentPlayer + CONTENT.win_part2;
+      endGame("win");
   }
 
   // Check draw
   else if (_gameTable.indexOf(" ") == -1) {
-    endGame();
-    get("#player").style.color = COLOR_DRAW;
-    get("#player").innerHTML = CONTENT.draw;
+    endGame("lose");
   }
 
   // Change player if no draw or victory
@@ -116,12 +111,23 @@ function checkVictory() {
 }
 
 /**
- * Change the display for the results
+ * Display the game over screen
+ * @param {string} mode win or lose
  **/
 
-function endGame() {
+function endGame(mode) {
   get("#board").style.display = "none";
   get(".buttonList")[0].style.display = "flex";
   get("#reload").style.display = "block";
-  get("#player").style.fontSize = "2em";
+  get("#gameOver").style.display = "flex";
+
+  if (mode === "win") {
+    get("#gameOver").style.color = _currentPlayer == 1 ?  COLOR_PLAYER1 : COLOR_PLAYER2;
+    get("#gameOver").innerHTML = CONTENT.win_part1 + _currentPlayer + CONTENT.win_part2;
+  }
+
+  if (mode === "lose") {
+    get("#gameOver").style.color = COLOR_DRAW;
+    get("#gameOver").innerHTML = CONTENT.draw;
+  }
 }

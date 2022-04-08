@@ -52,14 +52,14 @@ header {
     align-items: center;
     justify-content: center;
     padding: 2vh;
-    font-size: 3em;
     text-transform: uppercase;
+    font-size: 3em;
 }
 
 #footer {
-    font-family: sans-serif;
     padding: 2vh;
     text-align: center;
+    font-family: sans-serif;
     font-size: 0.9em;
     line-height: 1.6em;
 }
@@ -86,15 +86,15 @@ header {
 }
 
 button {
-    min-width: 13vw;
-    margin: 0 2vh;
+    margin: 0 2vw;
     padding: 2vh;
+    min-width: 20vw;
     border: 2px solid transparent;
     border-radius: 10px;
     text-transform: uppercase;
-    font-size: 1.6em;
-    font-weight: bolder;
     font-family: inherit;
+    font-size: 1.5em;
+    font-weight: bolder;
     background-color: var(--button-1);
     color: var(--button-2)
 }
@@ -108,9 +108,17 @@ button:hover {
     display: none;
 }
 
+@media (max-width:1024px) {
+    button {
+        min-width: 50vw;
+    }
+}
+
 /* ======================================== */
 /* ======== GAME */
 
+#titleScreen,
+#gameOver,
 #board {
     display: flex;
     flex-direction: column;
@@ -120,12 +128,26 @@ button:hover {
     user-select: none;
 }
 
-#player {
+#board,
+#gameOver {
     display: none;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    padding: 2vh 0;
+}
+
+#titleScreen,
+#gameOver {
+    padding: 0 25vw;
+    text-align: justify;
+    font-size: 1.35em;
+    text-align-last: center;
+}
+
+#gameOver {
+    font-size: 2em;
+}
+
+#player {
+    text-align: center;
+    margin-top: 5vh;
     font-size: 1.7em;
 }
 
@@ -193,9 +215,18 @@ button:hover {
 }
 
 @media(max-width:1024px) {
+    #titleScreen,
+    #gameOver {
+        padding: 0 5vw;
+        font-size: 1.25em;
+    }
+
+    #gameOver {
+        font-size: 1.8em;
+    }
+
     #player {
-        padding: 0;
-        font-size: 1.1em;
+        font-size: 1.5em;
     }
 
     .case {

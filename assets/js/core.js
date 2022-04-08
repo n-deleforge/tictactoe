@@ -1,7 +1,7 @@
 // =================================================
 // ============ CORE VARIABLES
 
-const VERSION = "1.0";
+const VERSION = "1.1";
 const GITHUB = "<a target=\"_blank\" href=\"https://github.com/n-deleforge/tictactoe\">GitHub</a>";
 const FOOTER = "V. " + VERSION + " | © 2020-22 | " + GITHUB + " | <a id=\"switchLanguage\"></a>";
 const FOOTER_INGAME = "V. " + VERSION + " | © 2020-22 | " + GITHUB;
@@ -19,7 +19,8 @@ const FRENCH = {
     'win_part1': "Victoire du joueur ",
     'win_part2': " 😁",
     'draw': "Égalité 😱",
-    'switchLanguage' : "English"
+    'switchLanguage' : "English",
+    'titleScreen': "<p>Le jeu du morpion est un jeu à 2 joueurs où le but est de tracer une ligne de 3 éléments (X ou O) dans n'importe quel sens. Cela se joue chacun son tour et le premier joueur est défini aléatoirement.</p>",
 };
 
 const ENGLISH = {
@@ -34,7 +35,8 @@ const ENGLISH = {
     'win_part1': "Player ",
     'win_part2': " won 😁",
     'draw': "Draw 😱",
-    'switchLanguage' : "French"
+    'switchLanguage' : "French",
+    'titleScreen': "<p>Tic-tac-toe is a game for 2 players where the goal is to draw a line of 3 elements (X or O) in any direction. It is played in turns and the first player is randomly determined.</p>",
 }
 
 // =================================================
