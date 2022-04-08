@@ -27,4 +27,4 @@ If you want to selfhost **TicTacToe** :
 # Changelog
 
 - 1.1 : modification of the application structure and a bit of CSS + JS rewriting. Sound removed.
-- 1.0 : initial release.
+- 1.0 : Initial release.
