@@ -22,7 +22,7 @@ get("#reload").addEventListener("click", () => { document.location.reload(); });
  * Create a new game and add event listener on each case
  **/
 
- function createGame() {
+function createGame() {
   // Update the display
   get("#footer").innerHTML = CONTENT.footerInGame;
   get("#titleScreen").style.display = "none";
@@ -41,7 +41,7 @@ get("#reload").addEventListener("click", () => { document.location.reload(); });
     nbCase.innerHTML = "";
     nbCase.addEventListener("click", () =>{ play(index) });
   });
- }
+}
 
 /**
  * Check the played case, check the victory and update the turn
